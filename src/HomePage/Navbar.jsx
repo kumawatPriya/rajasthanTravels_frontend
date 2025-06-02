@@ -1,56 +1,196 @@
-import React from "react";
-import logoImg from "../images/Indian-traditional-elephant.png"
+import React, { useState } from "react";
+import logoImg2 from "../images/viatra_logo.png";
+import {
+  Avatar,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Stack,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
+import { BsFillHandbagFill } from "react-icons/bs";
+import MenuIcon from "@mui/icons-material/Menu";
+import userIcon from "../images/user.png";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-function Navbar(){
+function Navbar() {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const open = Boolean(anchorEl);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
-    const nav = [
-        {
-            title: "Home"
-        },
-        {
-            title: "Holiday Packages"
-        },
-        {
-            title: "Family Packages"
-        },
-        {
-            title: "About Us"
-        },
-        {
-            title: "Inspiration"
-        },
-        {
-            title: "Reviews"
-        },
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-    ]
+  const handleAvatarClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    return(
-        <>
-        <div className="navbar-logo">
-            <div className="navbar-logo-img">
-            <img src={logoImg} alt="elephant" />
-            </div>
-            <div className="logo-title">
-            <p className="logo-title-word1">Explore</p>
-            <p className="logo-title-word2">Rajasthan</p>
-            </div>
-        </div>
-        <div className="navbar-main-list">
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const nav = [
+    { title: "Home", link: "/" },
+    { title: "Holiday Packages", link: "/holidayPackages" },
+    { title: "Destinations", link: "/destinations" },
+    { title: "Contact", link: "/contact" },
+    { title: "Blog", link: "/blog" },
+  ];
+
+  const navigatetoProfile = () => {
+    navigate("/profile");
+    handleClose();
+  };
+
+  return (
+    <>
+      <Stack
+        width="100%"
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        px={2}
+        py={1}
+      >
+        {/* Logo */}
+        <Stack className="logo-img" sx={{width: {xs: '70%', sm: '18%', md: '18%'}, height: '50px'}}>
+          <img
+            src={logoImg2}
+            alt="viatra"
+            width="57%"
+            style={{ marginLeft: {xs: '0px', md:"15px"}, marginTop: {xs: '-10px', md:"2px"} }}
+          />
+        </Stack>
+
+        {/* Nav Links or Hamburger Menu */}
         {
-            nav.map((list)=>{
-               return(
-                <>
-                <ul>
-                    <li>{list.title}</li>
-                </ul>
-                </>
-               )
-            })
+            isMobile && <Stack mt="4px" flexDirection="row" gap="20px" alignItems="center">
+          <BsFillHandbagFill color="#0d4662" fontSize="20px" />
+          <Avatar
+            alt="User"
+            src={userIcon}
+            sx={{ width: {xs: 22, md: 24}, height: {xs: 22, md: 24}, cursor: "pointer", mt: {xs: '2px'} }}
+            onClick={handleAvatarClick}
+          />
+        </Stack>
         }
-        </div>
-        </>
-    )
+        {isMobile ? (
+          <>
+            <IconButton onClick={() => setDrawerOpen(true)}>
+              <MenuIcon fontSize="20px"  sx={{mt: '6px',ml: '6px', fill:"black !important"}} />
+            </IconButton>
+            <Drawer
+              anchor="left"
+              open={drawerOpen}
+              onClose={() => setDrawerOpen(false)}
+            >
+              <List sx={{ width: 250 }}>
+                {nav.map((item, index) => (
+                  <ListItem key={index} disablePadding>
+                    <ListItemButton component={Link} to={item.link} onClick={() => setDrawerOpen(false)}>
+                      <ListItemText primary={item.title} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+            </Drawer>
+          </>
+        ) : (
+          <div className="navbar-main-list" style={{ display: "flex", gap: "35px" }}>
+            {nav.map((list, index) => (
+              <ul key={index} style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                <Link to={list.link} style={{ textDecoration: "none", color: "#000" }}>
+                  <li style={{fontSize: '15px', fontFamily: 'InterRegular'}}>{list.title}</li>
+                </Link>
+              </ul>
+            ))}
+          </div>
+        )}
+
+        {/* Cart + Avatar */}
+       {!isMobile && <Stack mt="4px" flexDirection="row" gap="20px" alignItems="center">
+          <BsFillHandbagFill color="#0d4662" fontSize="20px" />
+          <Avatar
+            alt="User"
+            src={userIcon}
+            sx={{ width: 24, height: 24, cursor: "pointer" }}
+            onClick={handleAvatarClick}
+          />
+        </Stack>}
+
+        {/* Dropdown Menu */}
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            elevation: 4,
+            sx: {
+              borderRadius: 2,
+              mt: 2,
+              padding: "0px",
+              "& .MuiList-root": { padding: "0px" },
+              "& .MuiMenuItem-root": {
+                px: 1.5,
+                py: 0.8,
+                fontSize: "0.95rem",
+                "&:hover": { backgroundColor: "#f0f0f0" },
+              },
+            },
+          }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          transformOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          {isLoggedIn ? (
+            <>
+              <MenuItem onClick={navigatetoProfile}>
+                <ListItemIcon>
+                  <AccountCircleIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Profile</ListItemText>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <LogoutIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Logout</ListItemText>
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <LoginIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Login</ListItemText>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <PersonAddIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Signup</ListItemText>
+              </MenuItem>
+            </>
+          )}
+        </Menu>
+      </Stack>
+    </>
+  );
 }
 
-export {Navbar}
+export { Navbar };

@@ -6,7 +6,7 @@ function LoginBar(){
     // console.log(data)
     return(
         <>
-        <div className="slogan">Luxury travel to Rajasthan since 1989</div>
+        <div className="slogan">Luxury travel to India since 1989</div>
         {/* <div style={{color: "white"}}>{data.state.email}</div> */}
         <div className="loginbar">
         <Link to="/login">Login</Link>

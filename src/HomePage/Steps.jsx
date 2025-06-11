@@ -6,7 +6,7 @@ import FlightIcon from "@mui/icons-material/Flight";
 import lakeImg from "../images/Lake.jpg";
 import mysoreIcon from "../images/mysoreIcon-removebg-preview.png"
 import { motion, useInView } from "framer-motion";
-import { RiStarSFill,RiStarHalfFill } from "react-icons/ri";
+import { RiStarSFill, RiStarHalfFill } from "react-icons/ri";
 
 
 const steps = [
@@ -38,7 +38,7 @@ export const TripSteps = () => {
         <Box ref={ref}
             display="flex"
             justifyContent="space-between"
-            width='81%' margin='auto' alignItems='center'
+            width={{ xs: '86%', md: '81%' }} margin='auto' alignItems='center'
             sx={{ backgroundColor: "#fff", gap: "48px", flexWrap: "wrap" }}
         >
             {/* Left Side */}
@@ -53,7 +53,7 @@ export const TripSteps = () => {
                 </Typography>
                 <Typography
                     variant="h4"
-                    sx={{ fontWeight: 700, fontSize: "38px", color: "#14183E", lineHeight: "50px", mb: 5, }}>
+                    sx={{ fontWeight: 700, fontSize: {xs: '28px',md:"38px"}, color: "#14183E", lineHeight: {xs:"40px",md:"50px"}, mb: {xs: 4, md:5}, }}>
                     Book Your Next Trip
                     <br />
                     In 3 Easy Steps
@@ -63,7 +63,7 @@ export const TripSteps = () => {
                     {steps.map((step, index) => (
                         <Box key={index} display="flex" alignItems="flex-start" gap={3}>
                             <Box
-                                width={65} height={45} display="flex" alignItems="center" justifyContent="center" borderRadius="12px" sx={{ backgroundColor: step.color, "& .MuiSvgIcon-root": { fontSize: 21, }, }}>
+                                width={{xs:110, md:65}} height={45} display="flex" alignItems="center" justifyContent="center" borderRadius="12px" sx={{ backgroundColor: step.color, "& .MuiSvgIcon-root": { fontSize: 21, }, }}>
                                 {step.icon}
                             </Box>
                             <Box>
@@ -87,13 +87,13 @@ export const TripSteps = () => {
 
                 <Box
                     sx={{
-                        position: "absolute", top: "-120px", left: "0px", right: "-90px", bottom: "0px",
+                        position: {md:"absolute"}, top: "-120px", left: "0px", right: { xs: "-70px", md: "-90px" }, bottom: "0px",
                         background: "radial-gradient(circle, rgb(144 196 255) 13%, white 61%);",
                         filter: "blur(60px)", zIndex: 0, borderRadius: "50%",
                     }} />
                 {/* Card with Blue Shadow */}
-                <Box overflow="hidden" borderRadius="24px" position="relative" zIndex={1} width='344px' boxShadow='1px 2px 4px #efefef'>
-                    <Card sx={{ width: 344, borderRadius: "24px", padding: '20px', boxShadow: "none", }}>
+                <Box overflow="hidden" borderRadius="24px" position="relative" zIndex={1} width={{ xs: '279px', md: '344px' }} boxShadow='1px 2px 4px #efefef'>
+                    <Card sx={{ width: { xs: 279, md: 344 }, borderRadius: "24px", padding: { xs: '10px', md: '20px' }, boxShadow: "none", }}>
                         <img
                             src={lakeImg}
                             alt="Trip to Shillong"
@@ -104,9 +104,9 @@ export const TripSteps = () => {
                                 borderRadius: '24px 24px 0px 0px '
                             }}
                         />
-                        <CardContent sx={{padding: '0px', paddingBottom: '0px !important'}}>
+                        <CardContent sx={{ padding: '0px', paddingBottom: '0px !important' }}>
                             <Typography
-                                fontSize="17px"
+                                fontSize={{ xs: '16px', md: "17px" }}
                                 fontWeight={500}
                                 color="#14183E"
                                 mt='10px'
@@ -114,7 +114,7 @@ export const TripSteps = () => {
                                 Trip To Shillong
                             </Typography>
                             <Typography
-                                fontSize="14px"
+                                fontSize={{ xs: '12px', md: "14px" }}
                                 color="#5E6282"
                                 mb={0.5}
                                 sx={{ display: "flex", gap: '4px' }}
@@ -124,11 +124,11 @@ export const TripSteps = () => {
                                 <b style={{ color: "#14183E" }}>Mithilesh Kumar</b>
                             </Typography>
                             <Stack flexDirection='row' mb='4px'>
-                                <RiStarSFill color="#ffce00"/>
-                                <RiStarSFill color="#ffce00"/>
-                                <RiStarSFill color="#ffce00"/>
-                                <RiStarSFill color="#ffce00"/>
-                                <RiStarHalfFill color="#ffce00"/>
+                                <RiStarSFill color="#ffce00" />
+                                <RiStarSFill color="#ffce00" />
+                                <RiStarSFill color="#ffce00" />
+                                <RiStarSFill color="#ffce00" />
+                                <RiStarHalfFill color="#ffce00" />
                             </Stack>
                             <Typography fontSize="14px" color="#5E6282">
                                 24 people going
@@ -137,61 +137,66 @@ export const TripSteps = () => {
                     </Card>
                 </Box>
                 {/* Floating Trip to Rome Card */}
-                  <motion.div
-          initial={{ x: 100, opacity: 0 }}
-          animate={inView ? { x: 0, opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          style={{
-            position: "absolute",
-            bottom: "58px",
-            right: "-49px",
-            backgroundColor: "#fff",
-            borderRadius: "18px",
-            boxShadow: "0px 2px 6px rgb(170 174 180 / 25%)",
-            padding: "9px",
-            width: "199px",
-            zIndex: 5,
-          }}
-        >
-                    <Box display="flex" gap={2} alignItems="center">
-                        <Avatar
-                            src={mysoreIcon}
-                            sx={{ width: 45, height: 45 }}
-                        />
-                        <Box>
-                            <Typography
-                                fontSize="12px"
-                                color="#5E6282"
-                                fontWeight={500}
-                                mb={0.5}
-                            >
-                                Ongoing
-                            </Typography>
-                            <Typography fontWeight={600} fontSize="14px" color="#14183E">
-                                Trip to Mysore
-                            </Typography>
-                            <Typography
-                                fontSize="12px"
-                                color="#5E6282"
-                                fontWeight={500}
-                                mt={0.5}
-                            >
-                                40% completed
-                            </Typography>
-                            <LinearProgress
-                                variant="determinate"
-                                value={40}
-                                sx={{
-                                    mt: 0.5, height: 5, borderRadius: 5,
-                                    backgroundColor: "#EEE",
-                                    "& .MuiLinearProgress-bar": {
-                                        backgroundColor: "#8A79DF",
-                                    },
-                                }}
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        bottom: '58px',
+                        right: { xs: '-15px', md: '-49px' }, // Responsive right
+                        zIndex: 5,
+                    }}
+                >
+                    <motion.div
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={inView ? { x: 0, opacity: 1 } : {}}
+                        transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
+                        style={{
+                            backgroundColor: '#fff',
+                            borderRadius: '18px',
+                            boxShadow: '0px 2px 6px rgb(170 174 180 / 25%)',
+                            padding: '9px',
+                            width: '199px',
+                        }}
+                    >
+                        <Box display="flex" gap={2} alignItems="center">
+                            <Avatar
+                                src={mysoreIcon}
+                                sx={{ width: { xs: 40, md: 45 }, height: { xs: 40, md: 45 } }}
                             />
+                            <Box>
+                                <Typography
+                                    fontSize="12px"
+                                    color="#5E6282"
+                                    fontWeight={500}
+                                    mb={0.5}
+                                >
+                                    Ongoing
+                                </Typography>
+                                <Typography fontWeight={600} fontSize="14px" color="#14183E">
+                                    Trip to Mysore
+                                </Typography>
+                                <Typography
+                                    fontSize="12px"
+                                    color="#5E6282"
+                                    fontWeight={500}
+                                    mt={0.5}
+                                >
+                                    40% completed
+                                </Typography>
+                                <LinearProgress
+                                    variant="determinate"
+                                    value={40}
+                                    sx={{
+                                        mt: 0.5, height: 5, borderRadius: 5,
+                                        backgroundColor: "#EEE",
+                                        "& .MuiLinearProgress-bar": {
+                                            backgroundColor: "#8A79DF",
+                                        },
+                                    }}
+                                />
+                            </Box>
                         </Box>
-                    </Box>
-                </motion.div>
+                    </motion.div>
+                </Box>
             </motion.div>
         </Box >
     );

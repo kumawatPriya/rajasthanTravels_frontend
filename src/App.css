@@ -49,12 +49,16 @@ body::-webkit-scrollbar-thumb:hover {
   font-family: 'Intersemibold';
   src: url('../public/fonts/Inter-SemiBold.otf');
 }
+@font-face {
+  font-family: 'Source_serif_pro';
+  src: url("../public/fonts/SourceSerifPro-Semibold.otf");
+}
 
 .login-bar-main {
   /* background-color: #441c00; */
   /* background-color: #7d5c45; */
   background: linear-gradient(45deg, #246876, #113752);
-  height: 31px;
+  height: 41px;
   font-size: 13px;
   display: flex;
   justify-content: space-between;
@@ -346,4 +350,50 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .minus_icon{
   margin-left: 23px;
+}
+
+@media only screen and (max-width: 600px) {
+  .minus_icon{
+  margin-left: 0px;
+}
+  .term{
+    font-size: 11px;
+  }
+  .slogan{
+    font-size: 11px;
+  }
+  .loginbar{line-height: 16px;}
+  .loginbar a{
+    font-size: 11px
+  }
+  .loginbar-slash{
+    font-size: 11px
+  }
+  /* Slider */
+  .slider-main{
+    height: 296px;
+  }
+  .viatra_slider .carousel-caption{
+    left: -25%;
+  }
+  .viatra_slider .carousel-caption h2{
+    font-size: 20px;
+  }
+  .viatra_slider .carousel-caption p{
+    font-size: 15px;
+  }
+  .slider-image{
+    height: 270px;
+    object-fit: cover;
+    filter: brightness(0.8);
+  }
+  .slider-main p {
+  left: 164px;
+  bottom: 60px;
+}
+.slider-main .carousel-indicators {
+  display: none !important;
+}
+
+
 }

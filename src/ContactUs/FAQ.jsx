@@ -79,7 +79,7 @@ function FAQSection() {
                         // Apply the border-bottom conditionally for panel 2 and 3
                         borderBottom: index === 0 || index === 1 || index === 2 ? "1px solid #e0e0e0" : "none",
                         boxShadow: expanded === panel ? "none" : "none",
-                        width: expanded === panel ? '96%' : '90%',
+                        width: expanded === panel ? {xs:'100%', md:'96%'} : {xs: '100%', md:'90%'},
                         margin: expanded === panel ? 'auto !important' : 'auto',
                         padding: expanded === panel ? '' : '10px 0px 13px'
                     }}

@@ -1,21 +1,6 @@
 import React, { useState } from "react";
 import logoImg2 from "../images/viatra_logo.png";
-import {
-  Avatar,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  Stack,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Avatar, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Stack, useMediaQuery, useTheme,} from "@mui/material";
 import { BsFillHandbagFill } from "react-icons/bs";
 import MenuIcon from "@mui/icons-material/Menu";
 import userIcon from "../images/user.png";
@@ -25,6 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { showGlobalSnackbar } from "../Atoms/GlobalSnackbar";
 
 function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -32,6 +18,7 @@ function Navbar() {
   const open = Boolean(anchorEl);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -43,6 +30,16 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+
+  const handleLogout = () => {
+  localStorage.removeItem("User");
+  showGlobalSnackbar("You have logged out successfully", "success");
+  setTimeout(() => {
+    navigate("/login");
+  }, 1500);
+};
+
 
   const nav = [
     { title: "Home", link: "/" },
@@ -77,7 +74,7 @@ function Navbar() {
           />
         </Stack>
 
-        {/* Nav Links or Hamburger Menu */}
+    
         {
             isMobile && <Stack mt="4px" flexDirection="row" gap="20px" alignItems="center">
           <BsFillHandbagFill color="#0d4662" fontSize="20px" />
@@ -156,37 +153,62 @@ function Navbar() {
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          {isLoggedIn ? (
-            <>
-              <MenuItem onClick={navigatetoProfile}>
-                <ListItemIcon>
-                  <AccountCircleIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Profile</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <LogoutIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Logout</ListItemText>
-              </MenuItem>
-            </>
-          ) : (
-            <>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <LoginIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Login</ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <PersonAddIcon fontSize="small" />
-                </ListItemIcon>
-                <ListItemText>Signup</ListItemText>
-              </MenuItem>
-            </>
-          )}
+         {isLoggedIn ? (
+  <>
+    <MenuItem onClick={navigatetoProfile} sx={{ px: 2, py: 1 }}>
+      <ListItemIcon>
+        <AccountCircleIcon fontSize="small" sx={{ color: "#18a5b2" }} />
+      </ListItemIcon>
+      <ListItemText
+        primary="Profile"
+        primaryTypographyProps={{
+          fontSize: "14px",
+          fontWeight: 500,
+        }}
+      />
+    </MenuItem>
+    <MenuItem onClick={handleLogout} sx={{ px: 2, py: 1 }}>
+      <ListItemIcon>
+        <LogoutIcon fontSize="small" sx={{ color: "#e53935" }} />
+      </ListItemIcon>
+      <ListItemText
+        primary="Logout"
+        primaryTypographyProps={{
+          fontSize: "14px",
+          fontWeight: 500,
+        }}
+      />
+    </MenuItem>
+  </>
+) : (
+  <>
+    <MenuItem onClick={() => navigate("/login")} sx={{ px: 2, py: 1 }}>
+      <ListItemIcon>
+        <LoginIcon fontSize="small" sx={{ color: "#18a5b2" }} />
+      </ListItemIcon>
+      <ListItemText
+        primary="Login"
+        primaryTypographyProps={{
+          fontSize: "14px",
+          fontWeight: 500,
+        }}
+      />
+    </MenuItem>
+    <MenuItem onClick={() => navigate("/signup")} sx={{ px: 2, py: 1 }}>
+      <ListItemIcon>
+        <PersonAddIcon fontSize="small" sx={{ color: "#18a5b2" }} />
+      </ListItemIcon>
+      <ListItemText
+        primary="Signup"
+        primaryTypographyProps={{
+          fontSize: "14px",
+          fontWeight: 500,
+        }}
+      />
+    </MenuItem>
+  </>
+)}
+
         </Menu>
       </Stack>
     </>

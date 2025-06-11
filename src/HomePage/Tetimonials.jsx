@@ -96,12 +96,12 @@ const Testimonials = () => {
             {/* Title */}
             <Box sx={{ textAlign: 'center', mb: 8, position: 'relative' }}>
                 <motion.div
-                    initial={{ x: 100, opacity: 0 }}
+                    initial={{ x: -20, opacity: 0 }}
                     whileInView={{ x: 0, opacity: 1 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                     viewport={{ once: true }}
                 >
-                    <Typography variant="h4" fontWeight="bold" sx={{ position: 'relative', zIndex: 2 }}>
+                    <Typography variant="h4" fontWeight="bold" sx={{ position: 'relative', zIndex: 2, fontSize:{xs:'22px',md:'33px'} }}>
                         What Our Customers Say
                     </Typography>
                 </motion.div>
@@ -109,7 +109,7 @@ const Testimonials = () => {
                 <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 0.2 }}
-                    transition={{ delay: 0.1, duration: 0.5, ease: 'easeOut' }}
+                    transition={{ delay: 0.1, duration: 0.3, ease: 'easeOut' }}
                     viewport={{ once: true }}
                 >
                     <Typography
@@ -120,7 +120,7 @@ const Testimonials = () => {
                             left: '50%',
                             transform: 'translateX(-50%)',
                             fontWeight: 'bold',
-                            fontSize: { xs: '3rem', md: '6rem' },
+                            fontSize: { xs: '2.5rem', md: '6rem' },
                             letterSpacing: 5,
                             textTransform: 'uppercase',
                             userSelect: 'none',

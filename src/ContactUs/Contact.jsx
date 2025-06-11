@@ -13,6 +13,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import { toast, ToastContainer } from 'react-toastify';
+import axios from 'axios';
+import { Config } from '../Utils/Config';
+import { showGlobalSnackbar } from '../Atoms/GlobalSnackbar';
 
 const Contact = () => {
     const [selectedDate, setSelectedDate] = useState(null);
@@ -46,14 +49,27 @@ const Contact = () => {
                 .required("Date is required"),
             message: Yup.string(),
         }),
-        onSubmit: (values) => {
-            console.log("Form Submitted:", values);
-           toast.success('Form submitted successfully.')
-        },
+        onSubmit:  async (values, { resetForm }) => {
+    try {
+        const response = await axios.post(`${Config?.Contact_us}`, values);
+        if (response.status === 200) {
+            showGlobalSnackbar(response?.data?.message , "success");
+            resetForm(); // Reset form after successful submission
+        } else {
+            showGlobalSnackbar('Something went wrong. Please try again.', "error");
+        }
+    } catch (error) {
+        console.error("API error:", error);
+        showGlobalSnackbar('Failed to submit the form. Please try again later.', "error");
+    }
+}
+
     });
+
+   
     return (
         <>
-        <ToastContainer position='top-center'/>
+        
         <Box sx={{ px: { xs: 2, md: 8 }, py: { xs: 4, md: 8 }, backgroundColor: '#fff', width: {xs:'95%', md: '88%'}, margin: 'auto' }}>
             <Stack direction={{ xs: 'column', md: 'row' }} spacing={4} alignItems="stretch">
                 {/* Left Info Section */}
@@ -79,7 +95,7 @@ const Contact = () => {
                                     Our Location
                                 </Typography>
                                 <Typography fontWeight="600" color='#4c4c4c' fontSize={{xs: '14px'}}>
-                                    Downtown Dubai, Dubai 00000, UAE
+                                    Connaught Place, New Delhi 110001, India
                                 </Typography>
                             </Box>
                         </Stack>

@@ -61,13 +61,20 @@ const cardVariants = {
 export const TopDestinations = () => {
     return (
         <>
-            <Box sx={{ px: 5, py: 8, textAlign: "center", backgroundColor: "#fff" }}>
-                <Typography variant="subtitle1" color="text.secondary">
-                    Top Selling
-                </Typography>
-                <Typography variant="h4" fontWeight="bold" gutterBottom>
-                    Top Destinations
-                </Typography>
+            <Box sx={{ px: 5, py: {xs: 4, md:8}, textAlign: "center", backgroundColor: "#fff" }}>
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    viewport={{ once: true }}
+                >
+                    <Typography variant="subtitle1" color="text.secondary">
+                        Top Selling
+                    </Typography>
+                    <Typography variant="h4" fontWeight="bold" gutterBottom fontFamily='InterRegular' fontSize={{xs: '22px', md: '33px'}}>
+                        Top Destinations
+                    </Typography>
+                </motion.div>
                 <motion.div
                     variants={containerVariants}
                     initial="hidden"
@@ -94,22 +101,22 @@ export const TopDestinations = () => {
                                             },
                                         }}
                                     >
-                                            <Box sx={{ height: 200, overflow: "hidden" }}>
-      <motion.img
-        variants={{
-          rest: { scale: 1 },
-          hover: { scale: 1.1 },
-        }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-        src={card.image}
-        alt={card.title}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-        }}
-      />
-    </Box>
+                                        <Box sx={{ height: 200, overflow: "hidden" }}>
+                                            <motion.img
+                                                variants={{
+                                                    rest: { scale: 1 },
+                                                    hover: { scale: 1.1 },
+                                                }}
+                                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                src={card.image}
+                                                alt={card.title}
+                                                style={{
+                                                    width: "100%",
+                                                    height: "100%",
+                                                    objectFit: "cover",
+                                                }}
+                                            />
+                                        </Box>
 
                                         <CardContent>
                                             <Typography variant="h6" fontSize='17px' fontFamily='system-ui' fontWeight="600">

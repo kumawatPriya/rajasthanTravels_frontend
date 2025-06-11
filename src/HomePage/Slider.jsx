@@ -27,7 +27,7 @@ function Slider() {
   };
   return (
     <>
-     <Carousel activeIndex={activeIndex} onSelect={handleSelect} interval={3000}>
+     <Carousel activeIndex={activeIndex} onSelect={handleSelect} interval={3000} className="viatra_slider" >
         <Carousel.Item>
           <SliderImg SlideImg={image1} />
           <Carousel.Caption>
@@ -36,6 +36,7 @@ function Slider() {
               variants={headingVariants}
               initial="initial"
               animate="animate"
+              className="slider_heading"
               transition={{ duration: 1 }}
             >
               Discover your dream destination
@@ -44,7 +45,7 @@ function Slider() {
               key={`paragraph-${activeIndex}`}
               variants={paragraphVariants}
               initial="initial"
-              animate="animate"
+              animate="animate" className="slider_subheading"
               transition={{ duration: 1, delay: 0.4 }}
             >
               Discover and explore a range of fabulous day trips and sightseeing attraction in INDIA.

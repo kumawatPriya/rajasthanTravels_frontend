@@ -12,6 +12,7 @@ import ViatraFeatures from "../HomePage/Features";
 import Blog from "../HomePage/Blog";
 import Footer from "../HomePage/Footer";
 import { TopDestinations } from "../HomePage/TopDestinations";
+import { Box } from "@mui/material";
 
 
 function Home() {
@@ -23,17 +24,17 @@ function Home() {
     };
     return (
         <>
-            <div className="login-bar-main"><LoginBar /></div>
+            <LoginBar />
             <div className="navbar-main"><Navbar /></div>
             <div className="slider-main"><Slider /></div>
-            <div><TopDestinations/></div>
-            <div className="step-main"><TripSteps/></div>
+            <div><TopDestinations /></div>
+            <div className="step-main"><TripSteps /></div>
             <motion.div {...fadeInUp} className="travel-cards-main"><TravelCards /></motion.div>
-            <div><AboutUs/></div>
-            <div><Testimonials/></div>
-            <div><ViatraFeatures/></div>
-            <div><Blog/></div>
-            <div><Footer/></div>
+            <div><AboutUs /></div>
+            <div><Testimonials /></div>
+            <div><ViatraFeatures /></div>
+            <div><Blog /></div>
+            <div><Footer /></div>
         </>
     )
 }

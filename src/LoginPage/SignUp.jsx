@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography, Paper, Stack} from "@mui/material";
+import { Box, Button, TextField, Typography, Paper, Stack } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,20 +13,24 @@ const Signup = () => {
     const [password, setPassword] = useState('');
 
     const signupApi = async () => {
-        const response = await fetch(`${Config?.Signup_Api}`, {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
-        });
+        try {
+            const response = await fetch(`${Config?.Signup_Api}`, {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-        const resSignUp = await response.json();
-        if (resSignUp) {
-            toast.success("Your account has been created. Please login to continue.");
-            setTimeout(() => {
-                navigate("/login");
-            }, 2000);
-        } else {
-            toast.error("Something went wrong. Try again.");
+            const resSignUp = await response.json();
+            if (resSignUp) {
+                toast.success("Your account has been created. Please login to continue.");
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2000);
+            } else {
+                toast.error("Something went wrong. Try again.");
+            }
+        } catch (error) {
+            toast.error('Something went wrong, please try again!')
         }
     };
 

@@ -1,19 +1,16 @@
-import {
-    Box,
-    Typography,
-    Grid,
-    Card,
-    CardMedia,
-    CardContent,
-    Button,
-    Stack,
-} from '@mui/material';
+import { Box, Typography, Grid, Card, CardMedia, CardContent, Button, Stack, } from '@mui/material';
 import { Place, Checklist, LocalOffer, HeadsetMic } from '@mui/icons-material';
 import himalaya_img from "../images/himalayas_velly.jpg";
 import rishikesh_img from "../images/rishikesh.webp";
 import jalMahal_img from "../images/royal_rajasthan.webp"
 import InterestPackages from './PackagesbyInterest';
 import TrendingDestinationsSlider from './TrendingDestination';
+import IndiaAtAGlance from './IndiaAtGlance';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import DestinationCards from './Cards';
+import { Link } from 'react-router-dom';
 
 const experiences = [
     {
@@ -40,15 +37,6 @@ const categories = [
     { label: 'Spiritual', image: '/images/spiritual.jpg' },
 ];
 
-const moreDestinations = [
-    { title: 'Ziro Valley, Arunachal Pradesh', image: '/images/ziro.jpg', description: 'A peaceful highland known for its green fields, Apatani tribal culture, and music festival.' },
-    { title: 'Coorg, Karnataka', image: '/images/coorg.jpg', description: 'Lush coffee estates, misty hills, and serene waterfalls in the Western Ghats.' },
-    { title: 'Kaziranga National Park, Assam', image: '/images/kaziranga.jpg', description: 'UNESCO World Heritage site known for one-horned rhinos and wildlife safaris.' },
-    { title: 'Andaman Islands', image: '/images/andaman.jpg', description: 'Tropical paradise with crystal-clear waters.' },
-    { title: 'Meghalaya', image: '/images/meghalaya.jpg', description: 'Living root bridges and untouched nature.' },
-    { title: 'Ranthambore, Rajasthan', image: '/images/ranthambore.jpg', description: 'Spot tigers and explore royal forts.' },
-];
-
 export default function DestinationPage() {
     return (
         <Box>
@@ -59,7 +47,7 @@ export default function DestinationPage() {
                     backgroundImage: `url("https://www.trafalgar.com/media/yxtps4mb/website-banner-taj-mahal-462772825.jpg?center=0.2810621166038131%2C0.49999999617765806&format=webp&mode=crop&width=1920&height=450&quality=80")`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    height: '75vh',
+                    height: {xs: '45vh', md: '75vh' },
                     color: 'white',
                     display: 'flex',
                     alignItems: 'center',
@@ -79,74 +67,107 @@ export default function DestinationPage() {
                     }}
                 />
                 <Box sx={{ position: 'relative', zIndex: 2 }}>
-                    <Typography variant="h3" fontWeight="bold" fontFamily='InterRegular'>
+                    <Typography variant="h3" fontWeight="bold" fontFamily='InterRegular' sx={{ fontSize: { xs: '26px', md: '48px' } }}>
                         Discover India with Viatra
                     </Typography>
-                    <Typography variant="h6" mt={2}>
+                    <Typography variant="h6" mt={2} sx={{ fontSize: { xs: '16px', md: '20px' } }}>
                         Unique destinations. Authentic experiences. Handcrafted for you.
                     </Typography>
-                    <Button variant="contained" color="primary" size="large" sx={{ mt: 4 }}>
-                        Browse Packages
-                    </Button>
+                    <Link to='/holidayPackages'>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{
+                                mt: { xs: 2, md: 4 },
+                                fontSize: { xs: '0.75rem', md: '1rem' },
+                                padding: { xs: '6px 16px', md: '10px 22px' },
+                                borderRadius: { xs: '6px', md: '8px' },
+                            }}
+                        >
+                            Browse Packages
+                        </Button></Link>
                 </Box>
             </Box>
 
             {/* Curated Experiences */}
             <Box px={4} py={8}>
-                <Typography variant="h5" fontWeight={700} gutterBottom fontFamily='InterMediumItalic'>
+                <Typography
+                    variant="h5"
+                    fontWeight={700}
+                    gutterBottom textAlign='center'
+                    fontFamily="Source_serif_pro" >
                     Curated Experiences
                 </Typography>
-                <Grid container spacing={4} mt={2}>
+
+                <Box
+                    display="flex"
+                    flexDirection={{xs: 'column', md: 'row'}}
+                    gap={3}
+                    overflow="auto"
+                    py={2}
+                    sx={{
+                        '&::-webkit-scrollbar': { display: 'none' },
+                        scrollbarWidth: 'none',
+                    }}
+                >
                     {experiences.map((exp, idx) => (
-                        <Grid item xs={12} md={4} key={idx}>
-                            <Card sx={{ transition: '0.3s', '&:hover': { transform: 'scale(1.02)' }, width: '375px' }}>
-                                <CardMedia component="img" height="220" image={exp.image} />
-                                <CardContent>
-                                    <Typography variant="h6" fontWeight={600}>
-                                        {exp.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {exp.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
+                        <Box
+                            key={idx}
+                            minWidth={{xs:"290px",md:"385px"}}
+                            height="238px"
+                            position="relative"
+                            borderRadius={3}
+                            overflow="hidden"
+                            sx={{
+                                flexShrink: 0,
+                                cursor: 'pointer',
+                                transition: 'transform 0.3s',
+                                '&:hover img': { transform: 'scale(1.1)' },
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src={exp.image}
+                                alt={exp.title}
+                                sx={{
+                                    width: '100%',
+                                    height: '100%',
+                                    objectFit: 'cover',
+                                    transition: 'transform 0.4s ease-in-out',
+                                }}
+                            />
+                            <Box
+                                position="absolute"
+                                top={0}
+                                left={0}
+                                width="100%"
+                                height="100%"
+                                bgcolor="rgba(0,0,0,0.4)"
+                                display="flex"
+                                flexDirection="column"
+                                justifyContent="flex-end"
+                                p={2}
+                            >
+                                <Typography variant="h6" color="#fff" fontWeight={600}>
+                                    {exp.title}
+                                </Typography>
+                                <Typography variant="body2" color="#eee">
+                                    {exp.description}
+                                </Typography>
+                            </Box>
+                        </Box>
                     ))}
-                </Grid>
+                </Box>
             </Box>
-            <Box px={4} py={8}>
-                <Typography variant="h4" fontWeight={700} gutterBottom>
-                    Explore More Destinations
-                </Typography>
-                <Grid container spacing={4} mt={2}>
-                    {moreDestinations.map((dest, idx) => (
-                        <Grid item xs={12} sm={6} md={4} key={idx}>
-                            <Card sx={{ transition: '0.3s', '&:hover': { transform: 'scale(1.02)' } }}>
-                                <CardMedia component="img" height="200" image={dest.image} />
-                                <CardContent>
-                                    <Typography variant="h6" fontWeight={600}>
-                                        {dest.title}
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {dest.description}
-                                    </Typography>
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+
             {/* Destination Categories */}
-          
 
-            <TrendingDestinationsSlider/>
-       <InterestPackages/>
-
-        
-
-
+            <TrendingDestinationsSlider />
+            <InterestPackages />
+            <DestinationCards />
+            <IndiaAtAGlance />
             {/* Final CTA */}
-            <Box textAlign="center" py={8} bgcolor="#18a5b2" color="white">
+            <Box textAlign="center" py={8} px={{xs: 2, md:0}} bgcolor="#18a5b2" color="white">
                 <Typography variant="h4" fontWeight={700}>
                     Your Indian Getaway Awaits
                 </Typography>

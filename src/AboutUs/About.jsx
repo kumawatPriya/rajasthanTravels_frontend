@@ -132,9 +132,9 @@ const AboutUs = () => {
 
         {/* Right Image Layout (EXACT MATCH) */}
         <Box sx={{ flex: 1 }}>
-          <Stack alignItems='center' gap={2}>
-            <Stack direction="row" gap={2} alignItems="end">
-              <Box sx={{ width: 210, height: 200, overflow: "hidden" }}>
+          <Stack alignItems='center' gap={{xs: 1, md:2}} >
+            <Stack direction="row" gap={{xs: 1, md:2}} alignItems="end">
+              <Box sx={{ width: {xs:140, md:210}, height: {xs:180,md:200}, overflow: "hidden" }}>
                 <motion.img
                   src={kashitempleImg}
                   alt="Kashi Temple"
@@ -152,7 +152,7 @@ const AboutUs = () => {
                 />
               </Box>
 
-              <Box sx={{ width: 260, height: 250, overflow: "hidden" }}>
+              <Box sx={{ width: {xs:170,md:260}, height: {xs:220, md:250}, overflow: "hidden" }}>
                 <motion.img
                   src={kashmirLakeImg}
                   alt="Kashmir Lake"
@@ -170,9 +170,9 @@ const AboutUs = () => {
                 />
               </Box>
             </Stack>
-            <Stack direction="row" gap={2} alignItems="start">
+            <Stack direction="row" gap={{xs: 1, md:2}} alignItems="start">
               {/* Left Blooming Image */}
-              <Box sx={{ width: 160, height: 150, overflow: "hidden" }}>
+              <Box sx={{ width: {xs:130,md:160}, height: {xs:140,md:150}, overflow: "hidden" }}>
                 <motion.img
                   src={JaipurMonumentsImg}
                   alt="Bottom left small"
@@ -191,7 +191,7 @@ const AboutUs = () => {
               </Box>
 
               {/* Right Blooming Image */}
-              <Box sx={{ width: 210, height: 200, overflow: "hidden" }}>
+              <Box sx={{ width: {xs:150, md:210}, height: {xs:170, md:200}, overflow: "hidden" }}>
                 <motion.img
                   src={Varanasi_ghatImg}
                   alt="Bottom right small"

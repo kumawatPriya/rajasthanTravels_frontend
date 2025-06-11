@@ -11,22 +11,31 @@ import BlogDetail from "./Blog/BlogDetails";
 import { Blog } from "./Screens/Blog";
 import { Destination } from "./Screens/Destination";
 import ProfilePage from "./Screens/Profile";
-
+import HolidayPackages from "./Screens/HolidayPackages";
+import { GlobalSnackbar } from "./Atoms/GlobalSnackbar";
+import ScrollToTop from "./Atoms/ScrolltoTop";
+import ScrollLayout from "./Atoms/ScrolltoTop";
+import { PackageDetails } from "./Screens/PackageDetails";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/blog" element={<Blog/>}/>
-          <Route path="/destinations" element={<Destination/>}/>
-          <Route path="/profile" element={<ProfilePage/>}/>
-        </Routes>
+        <GlobalSnackbar />
+        <ScrollLayout>
+          <Routes>
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/blog/:id" element={<BlogDetail />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/destinations" element={<Destination />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/holidayPackages" element={<HolidayPackages />} />
+            <Route path="/packageDetails/:id" element={<PackageDetails/>}/>
+          </Routes>
+        </ScrollLayout>
       </BrowserRouter>
     </>
   );

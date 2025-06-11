@@ -13,6 +13,7 @@ import {
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import { showGlobalSnackbar } from '../Atoms/GlobalSnackbar';
 
 const ProfilePage = () => {
   const fileInputRef = useRef(null);
@@ -33,6 +34,12 @@ const ProfilePage = () => {
   const backtohome = ()=>{
     navigate('/')
   }
+  const handleSave = ()=>{
+    showGlobalSnackbar('Your profile has been updated successfully...','success')
+    setTimeout(()=>{
+     navigate('/')
+    },1500)
+  }
 
   return (
     <Box
@@ -42,15 +49,16 @@ const ProfilePage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        px: 2,
+        px: 2, py:{xs:2, md:0}
       }}
     >
       <Card
         sx={{
           width: '100%',
           maxWidth: 900,
-          height: '90vh',
-          display: 'flex',
+          height: {xs: 'auto',md:'90vh'},
+          display: 'flex', padding: {xs: '0px', md: '0px'},
+          flexDirection: {xs: 'column', md: 'row'},
           borderRadius: 5,
           overflow: 'hidden',
           boxShadow: 10,
@@ -61,21 +69,21 @@ const ProfilePage = () => {
         {/* Left Panel - Profile Overview */}
         <Box
           sx={{
-            width: '35%',
+            width: {xs:'100%',md:'35%'},
             background: '#18a5b2',
             color: '#fff',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            p: 3,
-            gap: 2,
+            p: {xs:2,md:3},
+            gap: {xs:0, md:2},
           }}
         >
-          <Box sx={{ position: 'relative', width: 110, height: 110 }}>
+          <Box sx={{ position: 'relative', width: {xs:75,md:110}, height: {xs:75,md:110} }}>
             <Avatar
               src={avatar}
-              sx={{ width: 110, height: 110, border: '3px solid #fff' }}
+              sx={{ width: {xs:75,md:110}, height: {xs:75,md:110}, border: '3px solid #fff' }}
             />
             <IconButton
               size="small"
@@ -92,7 +100,7 @@ const ProfilePage = () => {
                 },
               }}
             >
-              <AddAPhotoIcon sx={{ fontSize: 20 }} />
+              <AddAPhotoIcon sx={{ fontSize: {xs:17,md:20} }} />
             </IconButton>
             <input
               type="file"
@@ -154,7 +162,7 @@ const ProfilePage = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            gap: 3,
+            gap: {xs:1,md:3},
           }}
         >
           <Typography variant="h5" fontWeight={500} color="#0d4662" fontFamily='InterRegular'>
@@ -183,6 +191,7 @@ const ProfilePage = () => {
                 backgroundColor: '#15919d',
               },
             }}
+            onClick={handleSave}
           >
             Save Changes
           </Button>

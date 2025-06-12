@@ -5,13 +5,25 @@ import { motion } from "framer-motion";
 import { Config } from "../Utils/Config";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import EnquiryDialog from "../HolidayPackages/EnquiryDailog";
 
 function TravelCards() {
    const [api, setApi] = useState([]);
    const [loading, setLoading] = useState(true);
+   const [openDialog, setOpenDialog] = useState(false);
    const { userId } = useSelector((state) => state.auth);
+   const [selectedPackage, setSelectedPackage] = useState(null)
    const navigate = useNavigate();
    console.log(userId, 'userid')
+   
+   const handleOpenDialog = (pkg)=>{
+      setOpenDialog(true);
+      setSelectedPackage(pkg)
+   }
+   const handleCloseDialog = (pkg)=>{
+      setOpenDialog(false);
+      setSelectedPackage(null)
+   }
    const getCards = async () => {
       try {
          const response = await fetch(`${Config?.Get_Special_packages}`);
@@ -189,7 +201,7 @@ function TravelCards() {
                                              "&:hover": {
                                                 backgroundColor: "#e17a00",
                                              },
-                                          }}
+                                          }} onClick={()=>handleOpenDialog(data)}
                                        >
                                           Enquire
                                        </Button>
@@ -203,8 +215,7 @@ function TravelCards() {
                }) : (<><Typography>No data found</Typography></>))
             }
          </Grid>
-
-         {/* <Button>Hello world</Button> */}
+         <EnquiryDialog open={openDialog} onClose={handleCloseDialog} packageDetails={{id: selectedPackage?.id, title: selectedPackage?.title}}/>
       </>
    );
 }

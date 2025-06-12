@@ -29,6 +29,23 @@ body::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
 
+.MuiPaper-root::-webkit-scrollbar {
+  width: 10px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-thumb {
+  background: #a2aeb0;
+  border-radius: 5px;
+}
+
+.MuiPaper-root::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 @font-face {
   font-family: 'Roboto';
   src: url('../public/fonts/roboto.regular.ttf');

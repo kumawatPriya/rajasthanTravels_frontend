@@ -12,7 +12,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 const PriceBox = ({ onCheckAvailabilityClick, details }) => {
   // Safely parse the price and calculate 10% higher value
-  const actualPrice = parseInt(details?.price?.replace(/,/g, '')) || 0;
+const actualPrice = parseInt(String(details?.price).replace(/,/g, '')) || 0;
   const oldPrice = Math.round(actualPrice * 1.1);
 
   // Format number with commas (e.g., 25300 → "25,300")
